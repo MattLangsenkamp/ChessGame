@@ -38,10 +38,14 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ChessPieceColor.cs" />
+    <Compile Include="Commands\CommandAbstractClass.cs" />
+    <Compile Include="Commands\IsCheckMateCommand.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Interfaces\IBoard.cs" />
     <Compile Include="Interfaces\IBoardManager.cs" />
     <Compile Include="Interfaces\IChessPiece.cs" />
+    <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

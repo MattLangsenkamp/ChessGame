@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChessGame.Interfaces
+namespace ChessGame
 {
-	public interface IChessPiece
+	public class ChessPieceColor
 	{
-		
+		public enum Color { White, Black}
 	}
 }
