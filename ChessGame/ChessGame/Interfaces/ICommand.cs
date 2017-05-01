@@ -10,7 +10,7 @@ namespace ChessGame.Interfaces
 	{
 		bool Execute(int x, int y);
 		bool IsOnBoard(int x, int y);
-		bool IsEnemyInPosition(int x, int y, ChessPieceColor.Color curColor);
-		bool IsTeamMateInPosition(int x, int y, ChessPieceColor.Color curColor);
+		bool IsEnemyInPosition(int x, int y, ChessPieceType.Color curColor);
+		bool IsTeamMateInPosition(int x, int y, ChessPieceType.Color curColor);
 	}
 }

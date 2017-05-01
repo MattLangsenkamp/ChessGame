@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace ChessGame.Interfaces
 {
-	public interface IChessPiece
+	public interface ISprite
 	{
-		ChessPieceType.Color Color {get;}
-		ChessPieceType.Type Type { get; }
-		void Draw(SpriteBatch spriteBatch, Vector2 Location);
+		void Draw(SpriteBatch spriteBatch, Vector2 location);
 	}
 }

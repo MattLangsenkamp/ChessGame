@@ -12,10 +12,12 @@ namespace ChessGame.Commands
 	{
 		protected IChessPiece[][] board;
 
-		public bool IsEnemyInPosition(int x, int y, ChessPieceColor.Color curColor)
+		public bool IsEnemyInPosition(int x, int y, ChessPieceType.Color curColor)
 		{
+			if (board[x][y].Color == curColor || board[x][y].Color == ChessPieceType.Color.Blank)
+				return false;
 
-			return false;
+			return true;
 		}
 
 		public bool IsOnBoard(int x, int y)
@@ -27,9 +29,12 @@ namespace ChessGame.Commands
 			return true;
 		}
 
-		public bool IsTeamMateInPosition(int x, int y, ChessPieceColor.Color curColor)
+		public bool IsTeamMateInPosition(int x, int y, ChessPieceType.Color curColor)
 		{
-			throw new NotImplementedException();
+			if (board[x][y].Color == curColor)
+				return true;
+
+			return false;
 		}
 
 		public virtual bool Execute(int x, int y)

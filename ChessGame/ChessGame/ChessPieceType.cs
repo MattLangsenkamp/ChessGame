@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ChessGame
 {
-	public class ChessPieceColor
+	public class ChessPieceType
 	{
-		public enum Color { White, Black}
+		public enum Color { White, Black, Blank}
+		public enum Type { King, Queen, Knight, Bishop, Rook, Pawn, Blank}
 	}
 }

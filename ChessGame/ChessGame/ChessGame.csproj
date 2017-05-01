@@ -38,16 +38,43 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ChessPieceColor.cs" />
+    <Compile Include="ChessPieceType.cs" />
     <Compile Include="Commands\CommandAbstractClass.cs" />
     <Compile Include="Commands\IsCheckMateCommand.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Interfaces\IBoard.cs" />
+    <Compile Include="Interfaces\IBoardDrawer.cs" />
     <Compile Include="Interfaces\IBoardManager.cs" />
     <Compile Include="Interfaces\IChessPiece.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
+    <Compile Include="Interfaces\ISprite.cs" />
+    <Compile Include="PieceObjects\BishopPieceBlack.cs" />
+    <Compile Include="PieceObjects\BishopPieceWhite.cs" />
+    <Compile Include="PieceObjects\KingPieceBlack.cs" />
+    <Compile Include="PieceObjects\KingPieceWhite.cs" />
+    <Compile Include="PieceObjects\KnightPieceBlack.cs" />
+    <Compile Include="PieceObjects\KnightPieceWhite.cs" />
+    <Compile Include="PieceObjects\PawnPieceBlack.cs" />
+    <Compile Include="PieceObjects\PawnPieceWhite.cs" />
+    <Compile Include="PieceObjects\QueenPieceBlack.cs" />
+    <Compile Include="PieceObjects\QueenPieceWhite.cs" />
+    <Compile Include="PieceObjects\RookPieceBlack.cs" />
+    <Compile Include="PieceObjects\RookPieceWhite.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpriteFactory.cs" />
+    <Compile Include="Sprites\BishopSpriteBlack.cs" />
+    <Compile Include="Sprites\BishopSpriteWhite.cs" />
+    <Compile Include="Sprites\KingSpriteBlack.cs" />
+    <Compile Include="Sprites\KingSpriteWhite.cs" />
+    <Compile Include="Sprites\KnightSpriteBlack.cs" />
+    <Compile Include="Sprites\KnightSpriteWhite.cs" />
+    <Compile Include="Sprites\PawnSpriteBlack.cs" />
+    <Compile Include="Sprites\PawnSpriteWhite.cs" />
+    <Compile Include="Sprites\QueenSpriteBlack.cs" />
+    <Compile Include="Sprites\QueenSpriteWhite.cs" />
+    <Compile Include="Sprites\RookSpriteBlack.cs" />
+    <Compile Include="Sprites\RookSpriteWhite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
