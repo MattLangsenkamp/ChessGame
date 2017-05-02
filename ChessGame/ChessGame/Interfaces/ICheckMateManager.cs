@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ChessGame.Interfaces
 {
-	interface IBoardDrawer
+	interface ICheckMateManager
 	{
+
 	}
 }

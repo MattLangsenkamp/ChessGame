@@ -10,10 +10,10 @@ using ChessGame.Sprites;
 
 namespace ChessGame
 {
-	class SpriteFactory
+	public class SpriteFactory
 	{
 		private static SpriteFactory instance = new SpriteFactory();
-		public SpriteFactory Instance
+		public static SpriteFactory Instance
 		{
 			get
 			{
@@ -23,13 +23,17 @@ namespace ChessGame
 		public int PieceWidth { get; } = 333;
 		public int PieceHeight { get; } = 333;
 		private Texture2D textureSheet;
+		private Texture2D maroonBoardSheet;
+		private Texture2D tanBoardSheet;
 
 		public void LoadContent(ContentManager content)
 		{
 			textureSheet = content.Load<Texture2D>("chessSprites");
+			maroonBoardSheet = content.Load<Texture2D>("MaroonBoardPiece");
+			tanBoardSheet = content.Load<Texture2D>("TanBoardPiece");
 		}
 
-		public SpriteFactory()
+		private SpriteFactory()
 		{
 
 		}
@@ -81,6 +85,14 @@ namespace ChessGame
 		public ISprite MakeRookSpriteWhite()
 		{
 			return new RookSpriteWhite(textureSheet);
+		}
+		public ISprite MakeMaroonBoardSprite()
+		{
+			return new BoardSprite(maroonBoardSheet);
+		}
+		public ISprite MakeTanBoardSprite()
+		{
+			return new BoardSprite(tanBoardSheet);
 		}
 	}
 }

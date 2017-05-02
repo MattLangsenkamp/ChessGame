@@ -16,7 +16,7 @@ namespace ChessGame.PieceObjects
 		private ISprite pieceSprite;
 		public BishopPieceBlack()
 		{
-
+			pieceSprite = SpriteFactory.Instance.MakeBishopSpriteBlack();
 		}
 		public void Draw(SpriteBatch spriteBatch, Vector2 location)
 		{

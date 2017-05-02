@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ChessGame.Interfaces
 {
-	public interface IBoardManager
+	public interface IBoardCreatorManager
 	{
+		IChessPiece[][] BuildBoard();
+		void InitializeBoard(IChessPiece[][] board);
 	}
 }

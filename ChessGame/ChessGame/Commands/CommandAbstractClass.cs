@@ -16,7 +16,6 @@ namespace ChessGame.Commands
 		{
 			if (board[x][y].Color == curColor || board[x][y].Color == ChessPieceType.Color.Blank)
 				return false;
-
 			return true;
 		}
 
@@ -33,7 +32,6 @@ namespace ChessGame.Commands
 		{
 			if (board[x][y].Color == curColor)
 				return true;
-
 			return false;
 		}
 

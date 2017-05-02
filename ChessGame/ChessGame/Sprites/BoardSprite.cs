@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace ChessGame.Sprites
 {
-	class BishopSpriteWhite : ISprite
+	class BoardSprite : ISprite
 	{
 		private Texture2D texture;
 		private int width;
 		private int height;
-		public BishopSpriteWhite(Texture2D t)
+		public BoardSprite(Texture2D t)
 		{
 			texture = t;
 			height = SpriteFactory.Instance.PieceHeight;
@@ -23,7 +23,7 @@ namespace ChessGame.Sprites
 		public void Draw(SpriteBatch spriteBatch, Vector2 location)
 		{
 			Rectangle dest = new Rectangle((int)location.X, (int)location.Y, width, height);
-			Rectangle source = new Rectangle(2 * width, 0, width, height);
+			Rectangle source = new Rectangle(0, 0, width, height);
 			spriteBatch.Draw(texture, dest, source, Color.White);
 		}
 	}

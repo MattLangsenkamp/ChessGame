@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChessGame.Interfaces
+namespace ChessGame.Managers
 {
-	public interface IBoardManager
+	class CheckMateManager
 	{
 	}
 }
