@@ -10,5 +10,6 @@ namespace ChessGame.Interfaces
 	{
 		IChessPiece[][] BuildBoard();
 		void InitializeBoard(IChessPiece[][] board);
+		IChessPiece[][] CopyBoard(IChessPiece[][] b);
 	}
 }

@@ -22,15 +22,20 @@ namespace ChessGame
 		}
 		public int PieceWidth { get; } = 333;
 		public int PieceHeight { get; } = 333;
+		public int ScreenDimension { get; } = 666;
 		private Texture2D textureSheet;
 		private Texture2D maroonBoardSheet;
 		private Texture2D tanBoardSheet;
+		private Texture2D lightMaroonBoardSheet;
+		private Texture2D lightTanBoardSheet;
 
 		public void LoadContent(ContentManager content)
 		{
 			textureSheet = content.Load<Texture2D>("chessSprites");
 			maroonBoardSheet = content.Load<Texture2D>("MaroonBoardPiece");
 			tanBoardSheet = content.Load<Texture2D>("TanBoardPiece");
+			lightMaroonBoardSheet = content.Load<Texture2D>("MaroonLightBoardPiece");
+			lightTanBoardSheet = content.Load<Texture2D>("TanLightBoardPiece");
 		}
 
 		private SpriteFactory()
@@ -80,10 +85,14 @@ namespace ChessGame
 		}
 		public ISprite MakeRookSpriteBlack()
 		{
+			if (textureSheet == null)
+				Console.WriteLine("wtf");
 			return new RookSpriteBlack(textureSheet);
 		}
 		public ISprite MakeRookSpriteWhite()
 		{
+			if (textureSheet == null)
+				Console.WriteLine("wtf");
 			return new RookSpriteWhite(textureSheet);
 		}
 		public ISprite MakeMaroonBoardSprite()
@@ -93,6 +102,14 @@ namespace ChessGame
 		public ISprite MakeTanBoardSprite()
 		{
 			return new BoardSprite(tanBoardSheet);
+		}
+		public ISprite MakeLightMaroonBoardSprite()
+		{
+			return new BoardSprite(lightMaroonBoardSheet);
+		}
+		public ISprite MakeLightTanBoardSprite()
+		{
+			return new BoardSprite(lightTanBoardSheet);
 		}
 	}
 }

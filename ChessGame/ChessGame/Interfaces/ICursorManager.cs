@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace ChessGame.Interfaces
 {
-	interface IDrawManager
+	interface ICursorManager
 	{
-		void Draw(SpriteBatch spriteBatch, IChessPiece[][] board);
-		void HighLightPiece(Vector2 vect);
+		Tuple<bool, Vector2> Update();
 	}
 }

@@ -9,6 +9,7 @@ namespace ChessGame
 	public class ChessPieceType
 	{
 		public enum Color { White, Black, Blank}
+		public enum BoardColor { Maroon, Tan }
 		public enum Type { King, Queen, Knight, Bishop, Rook, Pawn, Blank}
 	}
 }

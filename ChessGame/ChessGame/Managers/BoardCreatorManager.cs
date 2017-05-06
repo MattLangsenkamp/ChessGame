@@ -23,6 +23,18 @@ namespace ChessGame.Managers
 			}
 			return retBoard;
 		}
+		public IChessPiece[][] CopyBoard(IChessPiece[][] b)
+		{
+			IChessPiece[][] retBoard = BuildBoard();
+			for (int y = 0; y < b.Length; y++)
+			{
+				for (int x = 0; x < b.Length; x++)
+				{
+					retBoard[x][y] = b[x][y];
+				}
+			}
+			return retBoard;
+		}
 
 		public void InitializeBoard(IChessPiece[][] board)
 		{
@@ -34,7 +46,7 @@ namespace ChessGame.Managers
 			board[5][0] = new BishopPieceBlack();
 			board[6][0] = new KnightPieceBlack();
 			board[7][0] = new RookPieceBlack();
-			board[0][0] = new RookPieceBlack();
+			board[0][7] = new RookPieceWhite();
 			board[1][7] = new KnightPieceWhite();
 			board[2][7] = new BishopPieceWhite();
 			board[3][7] = new QueenPieceWhite();

@@ -1,4 +1,5 @@
 ﻿using ChessGame.Interfaces;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,34 +11,35 @@ namespace ChessGame.Commands
 {
 	public abstract class CommandAbstractClass : ICommand
 	{
-		protected IChessPiece[][] board;
+		//protected IChessPiece[][] board;
 
-		public bool IsEnemyInPosition(int x, int y, ChessPieceType.Color curColor)
+		public bool IsEnemyInPosition(IChessPiece[][] board, Vector2 l, ChessPieceType.Color teamColor)
 		{
-			if (board[x][y].Color == curColor || board[x][y].Color == ChessPieceType.Color.Blank)
+			if (board[(int)l.X][(int)l.Y].Color == teamColor || board[(int)l.X][(int)l.Y].Color == ChessPieceType.Color.Blank)
 				return false;
 			return true;
 		}
 
-		public bool IsOnBoard(int x, int y)
+		public bool IsOnBoard(IChessPiece[][] board, Vector2 location)
 		{
-			if (x > board.Length || x < 0)
+			if (location.X >= board.Length || location.X < 0)
 				return false;
-			if (y > board.Length || y < 0)
+			if (location.Y >= board.Length || location.Y < 0)
 				return false;
 			return true;
 		}
+		
 
-		public bool IsTeamMateInPosition(int x, int y, ChessPieceType.Color curColor)
+		public virtual bool IsTeamMateInPosition(IChessPiece[][] board, Vector2 l, ChessPieceType.Color curColor)
 		{
-			if (board[x][y].Color == curColor)
+			if (board[(int)l.X][(int)l.Y].Color == curColor)
 				return true;
 			return false;
 		}
 
-		public virtual bool Execute(int x, int y)
+		public virtual bool Execute(IChessPiece[][] board, Vector2 newLocation, Vector2 curLocation)
 		{
-			throw new NotImplementedException();
+			return true;
 		}
 	}
 }

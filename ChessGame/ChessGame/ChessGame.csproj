@@ -38,13 +38,19 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Commands\BishopMoveCommand.cs" />
+    <Compile Include="Commands\KingMoveCommand.cs" />
+    <Compile Include="Commands\KnightMoveCommand.cs" />
+    <Compile Include="Commands\PawnMoveCommand.cs" />
+    <Compile Include="Commands\QueenMoveCommand.cs" />
+    <Compile Include="Commands\RookMoveCommand.cs" />
+    <Compile Include="Interfaces\ICursorManager.cs" />
     <Compile Include="Interfaces\IBoardCreatorManager.cs" />
     <Compile Include="Interfaces\ICheckMateManager.cs" />
     <Compile Include="Managers\BoardCreatorManager.cs" />
     <Compile Include="Managers\BoardManager.cs" />
     <Compile Include="ChessPieceType.cs" />
     <Compile Include="Commands\CommandAbstractClass.cs" />
-    <Compile Include="Commands\IsCheckMateCommand.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Interfaces\IBoard.cs" />
     <Compile Include="Interfaces\IDrawManager.cs" />
@@ -53,6 +59,7 @@
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\ISprite.cs" />
     <Compile Include="Managers\CheckMateManager.cs" />
+    <Compile Include="Managers\CursorManager.cs" />
     <Compile Include="Managers\DrawManager.cs" />
     <Compile Include="PieceObjects\BishopPieceBlack.cs" />
     <Compile Include="PieceObjects\BishopPieceWhite.cs" />
