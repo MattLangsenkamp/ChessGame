@@ -32,8 +32,6 @@ namespace ChessGame.Commands
 				}
 			}
 			return false;
-
-			return true;
 		}
 	}
 }

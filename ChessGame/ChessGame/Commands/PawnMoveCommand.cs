@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ChessGame.Interfaces;
 using Microsoft.Xna.Framework;
-using ChessGame.Interfaces;
-using Microsoft.Xna.Framework;
+using ChessGame.PieceObjects;
 
 namespace ChessGame.Commands
 {
@@ -19,8 +18,22 @@ namespace ChessGame.Commands
 			if (IsTeamMateInPosition(board, newLocation, board[(int)curLocation.X][(int)curLocation.Y].Color))
 				return false;
 
+			int x = (int)curLocation.X;
+			int y = (int)curLocation.Y;
+			int[] xNews = { x-1, x, x+1, x-1, x, x+1};
+			int[] yNews = { y+1, y+1, y+1, y-1, y-1, y-1};
 
-			return true;
+			for(int i = 0; i<xNews.Length; i++)
+			{
+				if ((int)newLocation.X == xNews[i] && (int)newLocation.Y == yNews[i])
+				{
+					board[(int)newLocation.X][(int)newLocation.Y] = board[x][y];
+					board[x][y] = new BlankPiece();
+					return true;
+				}
+			}
+
+			return false;
 		}
 	}
 }
