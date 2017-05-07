@@ -12,6 +12,7 @@ namespace ChessGame.Interfaces
 	{
 		ChessPieceType.Color Color {get;}
 		ChessPieceType.Type Type { get; }
+		bool FirstMove { get; set; }
 		void Draw(SpriteBatch spriteBatch, Vector2 Location);
 	}
 }

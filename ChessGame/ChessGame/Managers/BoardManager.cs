@@ -17,6 +17,7 @@ namespace ChessGame
 		private IChessPiece[][] currentBoard;
 		private ICommand currentCommand;
 		private IChessPiece currentPiece;
+		private Vector2 currentLoc;
 		private IDrawManager drawManager;
 		private IBoardCreatorManager boardCreator;
 		private ICheckMateManager checkMateManager;
@@ -30,6 +31,8 @@ namespace ChessGame
 			drawManager = new DrawManager();
 			boardCreator = new BoardCreatorManager();
 			cursorManager = new CursorManager();
+			checkMateManager = new CheckMateManager();
+			gameStack = new Stack<IChessPiece[][]>();
 			currentBoard = boardCreator.BuildBoard();
 			boardCreator.InitializeBoard(currentBoard);
 			commandDict = new Dictionary<ChessPieceType.Type, ICommand>();
@@ -49,30 +52,47 @@ namespace ChessGame
 			bool executeVal = false;
 			if (click.Item1 == true)
 			{
-				drawManager.HighLightPiece(click.Item2);
 				if (!currentPiece.Equals(currentBoard[(int)click.Item2.X][(int)click.Item2.Y])
 					&& turnColor == currentBoard[(int)click.Item2.X][(int)click.Item2.Y].Color)
 				{
+					drawManager.HighLightPiece(click.Item2);
 					currentPiece = currentBoard[(int)click.Item2.X][(int)click.Item2.Y];
-					Console.WriteLine("first "+(int)click.Item2.X + " " + (int)click.Item2.Y);	
-					//currentCommand = commandDict[currentPiece.Type];
+					currentLoc = click.Item2;
+					//Console.WriteLine(currentLoc.X + " " + currentLoc.Y+ " 1");
+					currentCommand = commandDict[currentPiece.Type];
 					clickedOnce = true;
 				} else if (clickedOnce == true && turnColor != currentBoard[(int)click.Item2.X][(int)click.Item2.Y].Color)
 				{
-					Console.WriteLine("second " + (int)click.Item2.X + " " + (int)click.Item2.Y);
-					//executeVal = currentCommand.Execute(hypoBoard, click.Item2);
-					clickedOnce = false;
+					//Console.WriteLine((int)click.Item2.X + " " + (int)click.Item2.Y + " 2");
+					executeVal = currentCommand.Execute(hypoBoard, click.Item2, currentLoc);
 				}				
 			}
 			if (executeVal)
 			{
 				Vector2 kingLoc = checkMateManager.FindKing(hypoBoard, turnColor);
-				if (checkMateManager.IsInCheck(hypoBoard, kingLoc))
+				Console.WriteLine("king location "+(int)kingLoc.X + " " + (int)kingLoc.Y);
+				if (!checkMateManager.IsInCheck(hypoBoard, kingLoc))
 				{
 					gameStack.Push(currentBoard);
+					Console.WriteLine("Stack Count "+gameStack.Count);
 					currentBoard = hypoBoard;
+					clickedOnce = false;
+					ChangeTurnColor();
+					drawManager.HighLightPiece(new Vector2(-1));
 				}
 			}
+		}
+		public void AddCommand(ICommand com, ChessPieceType.Type key)
+		{
+			commandDict.Add(key, com);
+		}
+
+		private void ChangeTurnColor()
+		{
+			if (turnColor == ChessPieceType.Color.White)
+				turnColor = ChessPieceType.Color.Black;
+			else
+				turnColor = ChessPieceType.Color.White;
 		}
 	}
 }

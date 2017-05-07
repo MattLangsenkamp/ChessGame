@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commands\BishopMoveCommand.cs" />
+    <Compile Include="Commands\CastleCommand.cs" />
     <Compile Include="Commands\KingMoveCommand.cs" />
     <Compile Include="Commands\KnightMoveCommand.cs" />
     <Compile Include="Commands\PawnMoveCommand.cs" />

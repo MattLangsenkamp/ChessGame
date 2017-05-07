@@ -1,4 +1,5 @@
-﻿using ChessGame.Interfaces;
+﻿using ChessGame.Commands;
+using ChessGame.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -38,7 +39,13 @@ namespace ChessGame
         protected override void LoadContent()
         {
 			spriteBatch = new SpriteBatch(GraphicsDevice);
-        }
+			boardManager.AddCommand(new BishopMoveCommand(), ChessPieceType.Type.Bishop);
+			boardManager.AddCommand(new KingMoveCommand(), ChessPieceType.Type.King);
+			boardManager.AddCommand(new KnightMoveCommand(), ChessPieceType.Type.Knight);
+			boardManager.AddCommand(new PawnMoveCommand(), ChessPieceType.Type.Pawn);
+			boardManager.AddCommand(new QueenMoveCommand(), ChessPieceType.Type.Queen);
+			boardManager.AddCommand(new RookMoveCommand(), ChessPieceType.Type.Rook);
+		}
 
         protected override void UnloadContent()
         {

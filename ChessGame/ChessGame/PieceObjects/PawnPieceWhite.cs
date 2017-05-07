@@ -13,6 +13,7 @@ namespace ChessGame.PieceObjects
 	{
 		public ChessPieceType.Color Color { get; } = ChessPieceType.Color.White;
 		public ChessPieceType.Type Type { get; } = ChessPieceType.Type.Pawn;
+		public bool FirstMove { get; set; } = true;
 		private ISprite pieceSprite;
 		public PawnPieceWhite()
 		{

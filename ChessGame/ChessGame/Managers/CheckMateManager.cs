@@ -17,7 +17,19 @@ namespace ChessGame.Managers
 
 		public Vector2 FindKing(IChessPiece[][] board, ChessPieceType.Color color)
 		{
-			throw new NotImplementedException();
+			Vector2 retVal = new Vector2(0);
+			for (int y = 0;  y<board.Length; y++)
+			{
+				for(int x = 0; x<board.Length; x++)
+				{
+					if (board[x][y].Type == ChessPieceType.Type.King && board[x][y].Color == color)
+					{
+						retVal = new Vector2(x, y);
+						return retVal;
+					}
+				}
+			}
+			return retVal;
 		}
 
 		public bool IsInCheck(IChessPiece[][] board, Vector2 location)
@@ -145,11 +157,14 @@ namespace ChessGame.Managers
 				xNew++;
 			}
 
-			if (IsOnBoard(board, new Vector2(xNew, yNew)) && IsEnemyInPosition(board, new Vector2(x, yNew), board[x][y].Color))
+			if (IsOnBoard(board, new Vector2(xNew, yNew)) && IsEnemyInPosition(board, new Vector2(xNew, yNew), board[x][y].Color))
 				if (board[xNew][yNew].Type == ChessPieceType.Type.Bishop || board[xNew][yNew].Type == ChessPieceType.Type.Queen ||
 					board[xNew][yNew].Type == ChessPieceType.Type.King ||
 					board[xNew][yNew].Type == ChessPieceType.Type.Pawn)
+				{
+					Console.WriteLine("checked");
 					return true;
+				}
 			return false;
 		}
 		private bool DiagonalLeftDownInCheck(IChessPiece[][] board, Vector2 location)
@@ -164,7 +179,7 @@ namespace ChessGame.Managers
 				xNew--;
 			}
 
-			if (IsOnBoard(board, new Vector2(xNew, yNew)) && IsEnemyInPosition(board, new Vector2(x, yNew), board[x][y].Color))
+			if (IsOnBoard(board, new Vector2(xNew, yNew)) && IsEnemyInPosition(board, new Vector2(xNew, yNew), board[x][y].Color))
 				if (board[xNew][yNew].Type == ChessPieceType.Type.Bishop || board[xNew][yNew].Type == ChessPieceType.Type.Queen ||
 					board[xNew][yNew].Type == ChessPieceType.Type.King ||
 					board[xNew][yNew].Type == ChessPieceType.Type.Pawn)
@@ -184,7 +199,7 @@ namespace ChessGame.Managers
 				xNew++;
 			}
 
-			if (IsOnBoard(board, new Vector2(xNew, yNew)) && IsEnemyInPosition(board, new Vector2(x, yNew), board[x][y].Color))
+			if (IsOnBoard(board, new Vector2(xNew, yNew)) && IsEnemyInPosition(board, new Vector2(xNew, yNew), board[x][y].Color))
 				if (board[xNew][yNew].Type == ChessPieceType.Type.Bishop || board[xNew][yNew].Type == ChessPieceType.Type.Queen ||
 					board[xNew][yNew].Type == ChessPieceType.Type.King ||
 					board[xNew][yNew].Type == ChessPieceType.Type.Pawn)
@@ -203,7 +218,7 @@ namespace ChessGame.Managers
 				xNew--;
 			}
 
-			if (IsOnBoard(board, new Vector2(xNew, yNew)) && IsEnemyInPosition(board, new Vector2(x, yNew), board[x][y].Color))
+			if (IsOnBoard(board, new Vector2(xNew, yNew)) && IsEnemyInPosition(board, new Vector2(xNew, yNew), board[x][y].Color))
 				if (board[xNew][yNew].Type == ChessPieceType.Type.Bishop || board[xNew][yNew].Type == ChessPieceType.Type.Queen ||
 					board[xNew][yNew].Type == ChessPieceType.Type.King ||
 					board[xNew][yNew].Type == ChessPieceType.Type.Pawn)
@@ -218,12 +233,13 @@ namespace ChessGame.Managers
 			int[] xNews = { x - 1, x + 1, x + 2, x + 2, x + 1, x - 1, x - 2, x - 2 };
 			int[] yNews = { y - 2, y - 2, y - 1, y + 1, y + 2, y + 2, y + 1, y - 1 };
 			int counter = 0;
-			while (IsOnBoard(board, new Vector2(xNews[counter], yNews[counter])))
+			for(int i = 0; i<board.Length;i++)
 			{
-				if (board[xNews[counter]][yNews[counter]].Type == ChessPieceType.Type.Knight)
-					return true;
-				counter++;
+				if (IsOnBoard(board, new Vector2(xNews[counter], yNews[counter])) &&
+					board[xNews[counter]][yNews[counter]].Type == ChessPieceType.Type.Knight)
+						return true;
 			}
+			
 			return false;
 		}
 		private bool IsOnBoard(IChessPiece[][] board, Vector2 location)

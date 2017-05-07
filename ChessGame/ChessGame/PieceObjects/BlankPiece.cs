@@ -13,7 +13,7 @@ namespace ChessGame.PieceObjects
 	{
 		public ChessPieceType.Color Color { get; } = ChessPieceType.Color.Blank;
 		public ChessPieceType.Type Type { get; } = ChessPieceType.Type.Blank;
-		//private ISprite pieceSprite;
+		public bool FirstMove { get; set; } = true;
 		public BlankPiece()
 		{
 			

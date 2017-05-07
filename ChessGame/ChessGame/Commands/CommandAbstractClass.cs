@@ -41,5 +41,9 @@ namespace ChessGame.Commands
 		{
 			return true;
 		}
+		protected void ChangeMoveStatus(IChessPiece[][] board, Vector2 l)
+		{
+			board[(int)l.X][(int)l.Y].FirstMove = false;
+		}
 	}
 }
