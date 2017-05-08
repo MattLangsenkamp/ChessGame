@@ -18,7 +18,6 @@ namespace ChessGame.Commands
 			if (IsTeamMateInPosition(board, newLocation, board[(int)curLocation.X][(int)curLocation.Y].Color))
 				return false;
 
-
 			return CheckInPositionDiagonal(board,newLocation,curLocation);
 		}
 		private bool CheckInPositionDiagonal(IChessPiece[][] board, Vector2 newLocation, Vector2 curLocation)
@@ -28,7 +27,8 @@ namespace ChessGame.Commands
 
 			int xNew = x + 1;
 			int yNew = y + 1;
-			while (IsOnBoard(board, new Vector2(xNew, yNew)) && board[xNew][yNew].Color == ChessPieceType.Color.Blank)
+			while (IsOnBoard(board, new Vector2(xNew, yNew)) && board[xNew][yNew].Color == ChessPieceType.Color.Blank
+				&& !(newLocation.X == xNew && newLocation.Y == yNew))
 			{
 				xNew++;
 				yNew++;
@@ -42,7 +42,8 @@ namespace ChessGame.Commands
 
 			xNew = x - 1;
 			yNew = y + 1;
-			while (IsOnBoard(board, new Vector2(xNew, yNew)) && board[xNew][yNew].Color == ChessPieceType.Color.Blank)
+			while (IsOnBoard(board, new Vector2(xNew, yNew)) && board[xNew][yNew].Color == ChessPieceType.Color.Blank
+				&& !(newLocation.X == xNew && newLocation.Y == yNew))
 			{
 				xNew--;
 				yNew++;
@@ -56,7 +57,8 @@ namespace ChessGame.Commands
 
 			xNew = x + 1;
 			yNew = y - 1;
-			while (IsOnBoard(board, new Vector2(xNew, yNew)) && board[xNew][yNew].Color == ChessPieceType.Color.Blank)
+			while (IsOnBoard(board, new Vector2(xNew, yNew)) && board[xNew][yNew].Color == ChessPieceType.Color.Blank
+				&& !(newLocation.X == xNew && newLocation.Y == yNew))
 			{
 				xNew++;
 				yNew--;
@@ -70,10 +72,11 @@ namespace ChessGame.Commands
 
 			xNew = x - 1;
 			yNew = y - 1;
-			while (IsOnBoard(board, new Vector2(xNew, yNew)) && board[xNew][yNew].Color == ChessPieceType.Color.Blank)
+			while (IsOnBoard(board, new Vector2(xNew, yNew)) && board[xNew][yNew].Color == ChessPieceType.Color.Blank
+				&& !(newLocation.X == xNew && newLocation.Y == yNew))
 			{
 				yNew--;
-				xNew++;
+				xNew--;
 			}
 			if (newLocation.X == xNew && newLocation.Y == yNew)
 			{
