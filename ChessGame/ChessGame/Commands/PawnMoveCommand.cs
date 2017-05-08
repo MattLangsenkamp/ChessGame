@@ -65,7 +65,7 @@ namespace ChessGame.Commands
 					{
 						ChangeMoveStatus(board, curLocation);
 						board[(int)newLocation.X][(int)newLocation.Y] = board[x][y];
-						board[x][y] = new BlankPiece();				
+						board[x][y] = new BlankPiece();	
 						return true;
 					}
 				}

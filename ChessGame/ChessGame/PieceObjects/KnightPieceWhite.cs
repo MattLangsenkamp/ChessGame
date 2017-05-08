@@ -12,7 +12,7 @@ namespace ChessGame.PieceObjects
 	class KnightPieceWhite : IChessPiece
 	{
 		public ChessPieceType.Color Color { get; } = ChessPieceType.Color.White;
-		public ChessPieceType.Type Type { get; } = ChessPieceType.Type.Rook;
+		public ChessPieceType.Type Type { get; } = ChessPieceType.Type.Knight;
 		public bool FirstMove { get; set; } = true;
 		private ISprite pieceSprite;
 		public KnightPieceWhite()
