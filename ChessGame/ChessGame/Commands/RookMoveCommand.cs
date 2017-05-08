@@ -27,7 +27,8 @@ namespace ChessGame.Commands
 			int y = (int)curLocation.Y;
 
 			int xNew = x + 1;
-			while (IsOnBoard(board, new Vector2(xNew, y)) && board[xNew][y].Color == ChessPieceType.Color.Blank)
+			while (IsOnBoard(board, new Vector2(xNew, y)) && board[xNew][y].Color == ChessPieceType.Color.Blank
+				&& !(newLocation.X == xNew && newLocation.Y == y))
 			{
 				xNew++;
 			}
@@ -39,7 +40,8 @@ namespace ChessGame.Commands
 			}
 
 			xNew = x - 1;
-			while (IsOnBoard(board, new Vector2(xNew, y)) && board[xNew][y].Color == ChessPieceType.Color.Blank)
+			while (IsOnBoard(board, new Vector2(xNew, y)) && board[xNew][y].Color == ChessPieceType.Color.Blank
+				&& !(newLocation.X == xNew && newLocation.Y == y))
 			{
 				xNew--;
 			}
@@ -51,7 +53,8 @@ namespace ChessGame.Commands
 			}
 
 			int yNew = y + 1;
-			while (IsOnBoard(board, new Vector2(x, yNew)) && board[x][yNew].Color == ChessPieceType.Color.Blank)
+			while (IsOnBoard(board, new Vector2(x, yNew)) && board[x][yNew].Color == ChessPieceType.Color.Blank
+				&& !(newLocation.X == x && newLocation.Y == yNew))
 			{
 				yNew++;
 			}
@@ -63,7 +66,8 @@ namespace ChessGame.Commands
 			}
 
 			yNew = y - 1;
-			while (IsOnBoard(board, new Vector2(x, yNew)) && board[x][yNew].Color == ChessPieceType.Color.Blank)
+			while (IsOnBoard(board, new Vector2(x, yNew)) && board[x][yNew].Color == ChessPieceType.Color.Blank 
+				&& !(newLocation.X == x && newLocation.Y == yNew))
 			{
 				yNew--;
 			}
