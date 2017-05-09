@@ -10,9 +10,17 @@ namespace ChessGame.Managers
 {
 	class CheckMateManager:ICheckMateManager
 	{
+		private ChessPieceType.Color turnColor;
 		public CheckMateManager()
 		{
-
+			turnColor = ChessPieceType.Color.White;
+		}
+		public void ChangeTurn()
+		{
+			if (turnColor == ChessPieceType.Color.White)
+				turnColor = ChessPieceType.Color.Black;
+			else
+				turnColor = ChessPieceType.Color.White;
 		}
 
 		public Vector2 FindKing(IChessPiece[][] board, ChessPieceType.Color color)

@@ -50,27 +50,25 @@ namespace ChessGame
 			Tuple<bool, Vector2> click = cursorManager.Update();
 			IChessPiece[][] hypoBoard = boardCreator.CopyBoard(currentBoard);
 			bool executeVal = false;
+			Vector2 clickLoc = DecideVect(click.Item2);
 			if (click.Item1 == true)
 			{
-				if (!currentPiece.Equals(currentBoard[(int)click.Item2.X][(int)click.Item2.Y])
-					&& turnColor == currentBoard[(int)click.Item2.X][(int)click.Item2.Y].Color)
+				if (!currentPiece.Equals(currentBoard[(int)clickLoc.X][(int)clickLoc.Y])
+					&& turnColor == currentBoard[(int)clickLoc.X][(int)clickLoc.Y].Color)
 				{
 					drawManager.HighLightPiece(click.Item2);
-					currentPiece = currentBoard[(int)click.Item2.X][(int)click.Item2.Y];
-					currentLoc = click.Item2;
-					//Console.WriteLine(currentLoc.X + " " + currentLoc.Y+ " 1");
+					currentPiece = currentBoard[(int)clickLoc.X][(int)clickLoc.Y];
+					currentLoc = clickLoc;
 					currentCommand = commandDict[currentPiece.Type];
 					clickedOnce = true;
-				} else if (clickedOnce == true && turnColor != currentBoard[(int)click.Item2.X][(int)click.Item2.Y].Color)
+				} else if (clickedOnce == true && turnColor != currentBoard[(int)clickLoc.X][(int)clickLoc.Y].Color)
 				{
-					//Console.WriteLine((int)click.Item2.X + " " + (int)click.Item2.Y + " 2");
-					executeVal = currentCommand.Execute(hypoBoard, click.Item2, currentLoc);
+					executeVal = currentCommand.Execute(hypoBoard, clickLoc, currentLoc);
 				}				
 			}
 			if (executeVal)
 			{
 				Vector2 kingLoc = checkMateManager.FindKing(hypoBoard, turnColor);
-				Console.WriteLine("king location "+(int)kingLoc.X + " " + (int)kingLoc.Y);
 				if (!checkMateManager.IsInCheck(hypoBoard, kingLoc))
 				{
 					gameStack.Push(currentBoard);
@@ -87,8 +85,18 @@ namespace ChessGame
 			commandDict.Add(key, com);
 		}
 
+		public Vector2 DecideVect(Vector2 v)
+		{
+			if (turnColor == ChessPieceType.Color.White)
+				return v;
+			else
+				return new Vector2(7 - v.X, 7 - v.Y);
+		}
+
 		private void ChangeTurnColor()
 		{
+			checkMateManager.ChangeTurn();
+			drawManager.ChangeTurn();
 			if (turnColor == ChessPieceType.Color.White)
 				turnColor = ChessPieceType.Color.Black;
 			else

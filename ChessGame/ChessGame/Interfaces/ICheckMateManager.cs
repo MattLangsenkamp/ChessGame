@@ -12,5 +12,6 @@ namespace ChessGame.Interfaces
 		bool IsInCheck(IChessPiece[][] board, Vector2 location);
 		bool IsInCheckMate(IChessPiece[][] board, Vector2 location);
 		Vector2 FindKing(IChessPiece[][] board, ChessPieceType.Color color);
+		void ChangeTurn();
 	}
 }

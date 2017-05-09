@@ -12,5 +12,6 @@ namespace ChessGame.Interfaces
 	{
 		void Draw(SpriteBatch spriteBatch, IChessPiece[][] board);
 		void HighLightPiece(Vector2 vect);
+		void ChangeTurn();
 	}
 }

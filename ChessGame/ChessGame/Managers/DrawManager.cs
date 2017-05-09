@@ -13,14 +13,25 @@ namespace ChessGame.Managers
 	{
 		private int highlightX;
 		private int highlightY;
+		private ChessPieceType.Color turnColor;
 		public DrawManager()
 		{
-
+			turnColor = ChessPieceType.Color.White;
 		}
 		public void Draw(SpriteBatch spriteBatch, IChessPiece[][] board)
 		{
 			DrawBoard(spriteBatch);
-			DrawPieces(spriteBatch, board);
+			if (turnColor == ChessPieceType.Color.White)
+				DrawPiecesWhite(spriteBatch, board);
+			else
+				DrawPiecesBlack(spriteBatch, board);
+		}
+		public void ChangeTurn()
+		{
+			if (turnColor == ChessPieceType.Color.White)
+				turnColor = ChessPieceType.Color.Black;
+			else
+				turnColor = ChessPieceType.Color.White;
 		}
 		public void HighLightPiece(Vector2 vect)
 		{
@@ -28,13 +39,24 @@ namespace ChessGame.Managers
 			highlightY = (int)vect.Y;
 		}
 
-		private void DrawPieces(SpriteBatch spriteBatch, IChessPiece[][] board)
+		private void DrawPiecesWhite(SpriteBatch spriteBatch, IChessPiece[][] board)
 		{
 			for(int i = 0; i< board.Length;i++)
 			{
 				for(int j = 0; j < board.Length; j++)
 				{
 					board[j][i].Draw(spriteBatch, new Vector2(j*SpriteFactory.Instance.PieceWidth, i * SpriteFactory.Instance.PieceHeight));
+				}
+			}
+		}
+		private void DrawPiecesBlack(SpriteBatch spriteBatch, IChessPiece[][] board)
+		{
+			int offSet = board.Length - 1;
+			for (int i = 0; i < board.Length; i++)
+			{
+				for (int j = 0; j < board.Length; j++)
+				{
+					board[offSet - j][offSet - i].Draw(spriteBatch, new Vector2(j * SpriteFactory.Instance.PieceWidth, i * SpriteFactory.Instance.PieceHeight));
 				}
 			}
 		}
@@ -57,14 +79,14 @@ namespace ChessGame.Managers
 			ISprite curSprite;
 			if (j % 2 == 0)
 				if (i % 2 == 0)
-					curSprite = DecideColor(j, i, ChessPieceType.BoardColor.Maroon);
-				else
 					curSprite = DecideColor(j, i, ChessPieceType.BoardColor.Tan);
+				else
+					curSprite = DecideColor(j, i, ChessPieceType.BoardColor.Maroon);
 			else
 				if (i % 2 != 0)
-					curSprite = DecideColor(j, i, ChessPieceType.BoardColor.Maroon);
-				else
 					curSprite = DecideColor(j, i, ChessPieceType.BoardColor.Tan);
+				else
+					curSprite = DecideColor(j, i, ChessPieceType.BoardColor.Maroon);
 
 			return curSprite;
 		}
