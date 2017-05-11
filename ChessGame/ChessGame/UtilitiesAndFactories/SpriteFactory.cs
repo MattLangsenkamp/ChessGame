@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ChessGame.Interfaces;
 using ChessGame.Sprites;
+using ChessGame.UtilitiesAndFactories;
 
 namespace ChessGame
 {
@@ -20,9 +21,9 @@ namespace ChessGame
 				return instance;
 			}
 		}
-		public int PieceWidth { get; } = 333;
-		public int PieceHeight { get; } = 333;
-		public int ScreenDimension { get; } = 666;
+		public int PieceWidth { get; } = Utilities.PieceWidth;
+		public int PieceHeight { get; } = Utilities.PieceHeight;
+		
 		private Texture2D textureSheet;
 		private Texture2D maroonBoardSheet;
 		private Texture2D tanBoardSheet;
@@ -85,14 +86,10 @@ namespace ChessGame
 		}
 		public ISprite MakeRookSpriteBlack()
 		{
-			if (textureSheet == null)
-				Console.WriteLine("wtf");
 			return new RookSpriteBlack(textureSheet);
 		}
 		public ISprite MakeRookSpriteWhite()
 		{
-			if (textureSheet == null)
-				Console.WriteLine("wtf");
 			return new RookSpriteWhite(textureSheet);
 		}
 		public ISprite MakeMaroonBoardSprite()
@@ -110,6 +107,10 @@ namespace ChessGame
 		public ISprite MakeLightTanBoardSprite()
 		{
 			return new BoardSprite(lightTanBoardSheet);
+		}
+		public ISprite MakeScoreManagerBackRoundSprite()
+		{
+			return new SideBarBackRoundSprite(lightTanBoardSheet);
 		}
 	}
 }

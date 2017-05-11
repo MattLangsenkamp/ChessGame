@@ -1,5 +1,6 @@
 ﻿using ChessGame.Commands;
 using ChessGame.Interfaces;
+using ChessGame.UtilitiesAndFactories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,8 +21,8 @@ namespace ChessGame
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-			graphics.PreferredBackBufferWidth = SpriteFactory.Instance.ScreenDimension;
-			graphics.PreferredBackBufferHeight = SpriteFactory.Instance.ScreenDimension;
+			graphics.PreferredBackBufferWidth = Utilities.ScreenDimensionX;
+			graphics.PreferredBackBufferHeight = Utilities.ScreenDimensionY;
 			graphics.ApplyChanges();
 			Content.RootDirectory = "Content";
         }
@@ -64,8 +65,8 @@ namespace ChessGame
 		{
 			get
 			{
-				var scaleX = (float)GraphicsDevice.Viewport.Width / (float)900;
-				var scaleY = (float)GraphicsDevice.Viewport.Height / (float)900;
+				var scaleX = GraphicsDevice.Viewport.Width / 900f;
+				var scaleY = GraphicsDevice.Viewport.Height / 900f;
 				return new Vector3(scaleX, scaleY, 1.0f);
 			}
 		}
@@ -75,7 +76,7 @@ namespace ChessGame
 			{
 				var translationMatrix = Matrix.CreateTranslation(new Vector3(0, 0, 0));
 				var rotationMatrix = Matrix.CreateRotationZ(0);
-				var scaleMatrix = Matrix.CreateScale(new Vector3(.33783f, .33783f, 0));
+				var scaleMatrix = Matrix.CreateScale(new Vector3(.270264f, .33783f, 0));
 				var originMatrix = Matrix.CreateTranslation(new Vector3(0, 0, 0));
 
 				return translationMatrix * rotationMatrix * scaleMatrix * originMatrix;
@@ -87,7 +88,7 @@ namespace ChessGame
 			var viewMatrix = GetTransform;
 			spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied,
 									   null, null, null, null, viewMatrix * Matrix.CreateScale(screenScale));
-			//spriteBatch.Begin();
+
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 			boardManager.Draw(spriteBatch);
             base.Draw(gameTime);

@@ -9,14 +9,16 @@ using System.Threading.Tasks;
 
 namespace ChessGame.Managers
 {
-	class DrawManager: IDrawManager
+	class BoardDrawManager: IBoardDrawManager
 	{
 		private int highlightX;
 		private int highlightY;
 		private ChessPieceType.Color turnColor;
-		public DrawManager()
+		public BoardDrawManager()
 		{
 			turnColor = ChessPieceType.Color.White;
+			highlightX = -1;
+			highlightY = -1;
 		}
 		public void Draw(SpriteBatch spriteBatch, IChessPiece[][] board)
 		{
@@ -95,19 +97,17 @@ namespace ChessGame.Managers
 		{
 			ISprite curSprite;
 			if(Color == ChessPieceType.BoardColor.Maroon)
-			{
-				if (j == highlightX & i == highlightY)
-					curSprite = SpriteFactory.Instance.MakeLightMaroonBoardSprite(); ///
+				if (j == highlightX && i == highlightY)
+					curSprite = SpriteFactory.Instance.MakeLightMaroonBoardSprite(); 
 				else
 					curSprite = SpriteFactory.Instance.MakeMaroonBoardSprite();
-			}
-			else
-			{
-				if (j == highlightX & i == highlightY)
-					curSprite = SpriteFactory.Instance.MakeLightTanBoardSprite(); ///
+			
+			else	
+				if (j == highlightX && i == highlightY)
+					curSprite = SpriteFactory.Instance.MakeLightTanBoardSprite(); 
 				else
 					curSprite = SpriteFactory.Instance.MakeTanBoardSprite();
-			}
+
 			return curSprite;
 		}
 	}

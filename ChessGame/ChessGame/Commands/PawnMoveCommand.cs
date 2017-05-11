@@ -36,9 +36,9 @@ namespace ChessGame.Commands
 				{
 					if (IsEnemyInPosition(board, newLocation, board[(int)curLocation.X][(int)curLocation.Y].Color))
 					{
-						board[(int)newLocation.X][(int)newLocation.Y] = board[x][y];
-						board[x][y] = new BlankPiece();
 						ChangeMoveStatus(board, curLocation);
+						board[(int)newLocation.X][(int)newLocation.Y] = board[x][y];
+						board[x][y] = new BlankPiece();	
 						return true;
 					}
 				}
@@ -49,9 +49,9 @@ namespace ChessGame.Commands
 				{
 					if (!IsEnemyInPosition(board, newLocation,board[(int)curLocation.X][(int)curLocation.Y].Color))
 					{ 
-						board[(int)newLocation.X][(int)newLocation.Y] = board[x][y];
-						board[x][y] = new BlankPiece();
 						ChangeMoveStatus(board,curLocation);
+						board[(int)newLocation.X][(int)newLocation.Y] = board[x][y];
+						board[x][y] = new BlankPiece();						
 						return true;
 					}
 				}

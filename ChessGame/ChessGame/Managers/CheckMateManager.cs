@@ -173,7 +173,9 @@ namespace ChessGame.Managers
 			int yNew = y + 1;
 			int xNew = x + 1;
 			if (IsOnBoard(board, new Vector2(xNew, yNew)) && IsEnemyInPosition(board, new Vector2(xNew, yNew), board[x][y].Color))
-				if (board[xNew][yNew].Type == ChessPieceType.Type.Pawn || board[xNew][yNew].Type == ChessPieceType.Type.King)
+				if (board[xNew][yNew].Type == ChessPieceType.Type.King)
+					return true;
+				else if (board[xNew][yNew].Type == ChessPieceType.Type.Pawn && turnColor == ChessPieceType.Color.Black)
 					return true;
 			while (IsOnBoard(board, new Vector2(xNew, yNew)) && board[xNew][yNew].Color == ChessPieceType.Color.Blank)
 			{
@@ -194,7 +196,9 @@ namespace ChessGame.Managers
 			int yNew = y + 1;
 			int xNew = x - 1;
 			if (IsOnBoard(board, new Vector2(xNew, yNew)) && IsEnemyInPosition(board, new Vector2(xNew, yNew), board[x][y].Color))
-				if (board[xNew][yNew].Type == ChessPieceType.Type.King || board[xNew][yNew].Type == ChessPieceType.Type.Pawn)
+				if (board[xNew][yNew].Type == ChessPieceType.Type.King)
+					return true;
+				else if (board[xNew][yNew].Type == ChessPieceType.Type.Pawn && turnColor == ChessPieceType.Color.Black)
 					return true;
 			while (IsOnBoard(board, new Vector2(xNew, yNew)) && board[xNew][yNew].Color == ChessPieceType.Color.Blank)
 			{
@@ -216,7 +220,9 @@ namespace ChessGame.Managers
 			int xNew = x + 1;
 
 			if (IsOnBoard(board, new Vector2(xNew, yNew)) && IsEnemyInPosition(board, new Vector2(xNew, yNew), board[x][y].Color))
-				if (board[xNew][yNew].Type == ChessPieceType.Type.King || board[xNew][yNew].Type == ChessPieceType.Type.Pawn)
+				if (board[xNew][yNew].Type == ChessPieceType.Type.King)
+					return true;
+				else if (board[xNew][yNew].Type == ChessPieceType.Type.Pawn && turnColor == ChessPieceType.Color.White)
 					return true;
 
 			while (IsOnBoard(board, new Vector2(xNew, yNew)) && board[xNew][yNew].Color == ChessPieceType.Color.Blank)
@@ -237,9 +243,11 @@ namespace ChessGame.Managers
 			int yNew = y - 1;
 			int xNew = x - 1;
 			if (IsOnBoard(board, new Vector2(xNew, yNew)) && IsEnemyInPosition(board, new Vector2(xNew, yNew), board[x][y].Color))
-				if (board[xNew][yNew].Type == ChessPieceType.Type.King ||
-					board[xNew][yNew].Type == ChessPieceType.Type.Pawn)
+				if (board[xNew][yNew].Type == ChessPieceType.Type.King)
 					return true;
+				else if (board[xNew][yNew].Type == ChessPieceType.Type.Pawn && turnColor == ChessPieceType.Color.White)
+					return true;
+			
 
 			while (IsOnBoard(board, new Vector2(xNew, yNew)) && board[xNew][yNew].Color == ChessPieceType.Color.Blank)
 			{

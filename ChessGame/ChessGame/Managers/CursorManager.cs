@@ -1,4 +1,5 @@
 ﻿using ChessGame.Interfaces;
+using ChessGame.UtilitiesAndFactories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -18,7 +19,7 @@ namespace ChessGame.Managers
 		public Tuple<bool,Vector2> Update()
 		{
 			MouseState ms = Mouse.GetState();
-			int block = SpriteFactory.Instance.ScreenDimension / 8;
+			int block = Utilities.ScreenDimensionY / 8;
 
 
 			if(ms.X / block > 7 || ms.Y / block > 7 || ms.X < 0 || ms.Y < 0)

@@ -14,24 +14,30 @@ namespace ChessGame
 	class BoardManager:IBoardManager
 	{
 		private Stack<IChessPiece[][]> gameStack;
+
 		private IChessPiece[][] currentBoard;
 		private ICommand currentCommand;
 		private IChessPiece currentPiece;
 		private Vector2 currentLoc;
-		private IDrawManager drawManager;
+
+		private IBoardDrawManager drawManager;
 		private IBoardCreatorManager boardCreator;
 		private ICheckMateManager checkMateManager;
 		private ICursorManager cursorManager;
+		private IScoreManager scoreManager;
+
 		private ChessPieceType.Color turnColor;
+
 		private Dictionary<ChessPieceType.Type, ICommand> commandDict;
 		private bool clickedOnce;
 
 		public BoardManager()
 		{
-			drawManager = new DrawManager();
+			drawManager = new BoardDrawManager();
 			boardCreator = new BoardCreatorManager();
 			cursorManager = new CursorManager();
 			checkMateManager = new CheckMateManager();
+			scoreManager = new ScoreManager();
 			gameStack = new Stack<IChessPiece[][]>();
 			currentBoard = boardCreator.BuildBoard();
 			boardCreator.InitializeBoard(currentBoard);
@@ -43,6 +49,7 @@ namespace ChessGame
 		public void Draw(SpriteBatch spriteBatch)
 		{
 			drawManager.Draw(spriteBatch, currentBoard);
+			scoreManager.Draw(spriteBatch, currentBoard);
 		}	
 
 		public void Update()
@@ -87,16 +94,16 @@ namespace ChessGame
 
 		public Vector2 DecideVect(Vector2 v)
 		{
-			if (turnColor == ChessPieceType.Color.White)
+			//if (turnColor == ChessPieceType.Color.White)
 				return v;
-			else
-				return new Vector2(7 - v.X, 7 - v.Y);
+			//else
+				//return new Vector2(7 - v.X, 7 - v.Y);
 		}
 
 		private void ChangeTurnColor()
 		{
 			checkMateManager.ChangeTurn();
-			drawManager.ChangeTurn();
+			//drawManager.ChangeTurn();
 			if (turnColor == ChessPieceType.Color.White)
 				turnColor = ChessPieceType.Color.Black;
 			else

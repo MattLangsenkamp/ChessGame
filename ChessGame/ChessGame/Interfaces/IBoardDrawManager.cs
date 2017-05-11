@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ChessGame.Interfaces
 {
-	interface IDrawManager
+	interface IBoardDrawManager
 	{
 		void Draw(SpriteBatch spriteBatch, IChessPiece[][] board);
 		void HighLightPiece(Vector2 vect);
