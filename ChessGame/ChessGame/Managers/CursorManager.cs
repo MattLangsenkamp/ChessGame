@@ -22,7 +22,7 @@ namespace ChessGame.Managers
 			int block = Utilities.ScreenDimensionY / 8;
 
 
-			if(ms.X / block > 7 || ms.Y / block > 7 || ms.X < 0 || ms.Y < 0)
+			if(ms.X / block > 9 || ms.Y / block > 7 || ms.X < 0 || ms.Y < 0)
 				return new Tuple<bool, Vector2>(false, new Vector2(0));
 
 			Vector2 retValVect = new Vector2(ms.X/block, ms.Y/block);

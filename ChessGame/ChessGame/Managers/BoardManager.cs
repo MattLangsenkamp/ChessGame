@@ -57,21 +57,10 @@ namespace ChessGame
 			Tuple<bool, Vector2> click = cursorManager.Update();
 			IChessPiece[][] hypoBoard = boardCreator.CopyBoard(currentBoard);
 			bool executeVal = false;
-			Vector2 clickLoc = DecideVect(click.Item2);
+	
 			if (click.Item1 == true)
 			{
-				if (!currentPiece.Equals(currentBoard[(int)clickLoc.X][(int)clickLoc.Y])
-					&& turnColor == currentBoard[(int)clickLoc.X][(int)clickLoc.Y].Color)
-				{
-					drawManager.HighLightPiece(click.Item2);
-					currentPiece = currentBoard[(int)clickLoc.X][(int)clickLoc.Y];
-					currentLoc = clickLoc;
-					currentCommand = commandDict[currentPiece.Type];
-					clickedOnce = true;
-				} else if (clickedOnce == true && turnColor != currentBoard[(int)clickLoc.X][(int)clickLoc.Y].Color)
-				{
-					executeVal = currentCommand.Execute(hypoBoard, clickLoc, currentLoc);
-				}				
+				executeVal = Clicked(click, hypoBoard);				
 			}
 			if (executeVal)
 			{
@@ -86,6 +75,43 @@ namespace ChessGame
 					drawManager.HighLightPiece(new Vector2(-1));
 				}
 			}
+		}
+
+		private bool Clicked(Tuple<bool, Vector2> click, IChessPiece[][] hypoBoard)
+		{
+			bool executeVal = false;
+			if ((int)click.Item2.X < 8)
+				executeVal = ClickedOnBoard(click, hypoBoard);
+			else
+				executeVal = ClickedOnSideBar(click);
+			return executeVal;
+		}
+
+		private bool ClickedOnBoard(Tuple<bool, Vector2> click, IChessPiece[][] hypoBoard)
+		{
+			bool executeVal = false;
+			Vector2 clickLoc = DecideVect(click.Item2);
+			Console.WriteLine("clicked board X: " + clickLoc.X + " Y: " + clickLoc.Y);
+			if (!currentPiece.Equals(currentBoard[(int)clickLoc.X][(int)clickLoc.Y])
+				&& turnColor == currentBoard[(int)clickLoc.X][(int)clickLoc.Y].Color)
+			{
+				drawManager.HighLightPiece(click.Item2);
+				currentPiece = currentBoard[(int)clickLoc.X][(int)clickLoc.Y];
+				currentLoc = clickLoc;
+				currentCommand = commandDict[currentPiece.Type];
+				clickedOnce = true;
+			}
+			else if (clickedOnce == true && turnColor != currentBoard[(int)clickLoc.X][(int)clickLoc.Y].Color)
+			{
+				executeVal = currentCommand.Execute(hypoBoard, clickLoc, currentLoc);
+			}
+			return executeVal;
+		}
+		private bool ClickedOnSideBar(Tuple<bool, Vector2> click)
+		{
+			//Console.WriteLine("clicked board X: " + click.Item2.X + " Y: " + click.Item2.Y);
+			scoreManager.ButtonPressed(click.Item2);
+			return false; 
 		}
 		public void AddCommand(ICommand com, ChessPieceType.Type key)
 		{

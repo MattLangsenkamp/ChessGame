@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using ChessGame.UtilitiesAndFactories;
 using Microsoft.Xna.Framework;
+using ChessGame.Sprites;
 
 namespace ChessGame.Managers
 {
@@ -14,6 +15,7 @@ namespace ChessGame.Managers
 	{
 		private int blackScore;
 		private int whiteScore;
+		private int[][] buttonList;
 		private ISprite backRoundSprite;
 		private ITextSprite blackScoreText;
 		private ITextSprite whiteSocreText;
@@ -22,12 +24,24 @@ namespace ChessGame.Managers
 		public ScoreManager()
 		{
 			backRoundSprite = SpriteFactory.Instance.MakeScoreManagerBackRoundSprite();
+
+			buttonList = new int[2][];
+			for (int i = 0; i < 2; i++)
+				buttonList[i] = new int[8];
+
+			for (int i = 0; i < 2; i++)
+				for (int j = 0; j < 8; j++)
+					if (i == 0)
+						buttonList[i][j] = 2 * j;
+					else
+						buttonList[i][j] = 2 * j + 1;
+
 		}
 		public void Draw(SpriteBatch spriteBatch, IChessPiece[][] board)
 		{
 			Vector2 loc = new Vector2(board.Length * Utilities.PieceWidth, 0);
-			//blackScoreText = new ITextSprite();
-			//whiteSocreText = new ITextSprite();
+			//blackScoreText = new TextSprite();
+			//whiteSocreText = new TextSprite();
 			backRoundSprite.Draw(spriteBatch, loc);
 		}
 
@@ -72,6 +86,68 @@ namespace ChessGame.Managers
 				whiteScore += amount;
 			else
 				blackScore += amount;
+		}
+
+		public void ButtonPressed(Vector2 loc)
+		{
+			int button = buttonList[(int)loc.X - 8][(int)loc.Y];
+
+			switch (button)
+			{
+				case 0:
+					Console.WriteLine(0);
+					break;
+				case 1:
+					Console.WriteLine(1);
+					break;
+				case 2:
+					Console.WriteLine(2);
+					break;
+				case 3:
+					Console.WriteLine(3);
+					break;
+				case 4:
+					Console.WriteLine(4);
+					break;
+				case 5:
+					Console.WriteLine(5);
+					break;
+				case 6:
+					Console.WriteLine(6);
+					break;
+				case 7:
+					Console.WriteLine(7);
+					break;
+				case 8:
+					Console.WriteLine(8);
+					break;
+				case 9:
+					Console.WriteLine(9);
+					break;
+				case 10:
+					Console.WriteLine(10);
+					break;
+				case 11:
+					Console.WriteLine(11);
+					break;
+				case 12:
+					Console.WriteLine(12);
+					break;
+				case 13:
+					Console.WriteLine(13);
+					break;
+				case 14:
+					Console.WriteLine(14);
+					break;
+				case 15:
+					Console.WriteLine(15);
+					break;
+				case 16:
+					Console.WriteLine(16);
+					break;
+				default:
+					break;
+			}
 		}
 	}
 }
