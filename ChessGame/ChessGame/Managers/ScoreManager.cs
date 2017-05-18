@@ -28,7 +28,9 @@ namespace ChessGame.Managers
 		private ArrowButton leftArrow;
 		private ArrowButton rightArrow;
 
+		private int clickBuffer = 0;
 
+		private bool clickDisabled;
 		public ScoreManager()
 		{
 			turnColor = ChessPieceType.Color.White;
@@ -43,6 +45,7 @@ namespace ChessGame.Managers
 			boardFlipText.Text = "Flip Board";
 			leftArrow = new ArrowButton(ChessPieceType.Direction.Left, new Vector2(8 * Utilities.PieceWidth, 4 * Utilities.PieceHeight));
 			rightArrow = new ArrowButton(ChessPieceType.Direction.Right, new Vector2(8 * Utilities.PieceWidth + Utilities.PieceWidth, 4 * Utilities.PieceHeight));
+			clickDisabled = false;
 
 			buttonList = new int[2][];
 			for (int i = 0; i < 2; i++)
@@ -106,7 +109,23 @@ namespace ChessGame.Managers
 				turnText.Text = "Black's turn";
 			blackScoreText.Text = "Black's Score: "+blackScore;
 			whiteScoreText.Text = "Whites's Score: "+whiteScore;
-			return ButtonPressed(location);
+
+			ChessPieceType.ClickCommand retVal = ChessPieceType.ClickCommand.NoClick;
+			if (!clickDisabled)
+				retVal = ButtonPressed(location);
+			if (retVal != ChessPieceType.ClickCommand.NoClick)
+				clickDisabled = true;
+			if(clickDisabled)
+			{
+				clickBuffer++;
+				if (clickBuffer > 2)
+				{
+					clickBuffer = 0;
+					clickDisabled = false;
+				}
+			}
+
+			return retVal;
 		}
 
 		private void DecideScore(ChessPieceType.Color teamColorTaken, int amount)
@@ -164,7 +183,6 @@ namespace ChessGame.Managers
 				default:
 					break;
 			}
-			Console.WriteLine(retVal);
 			return retVal;
 		}
 

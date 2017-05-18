@@ -27,6 +27,7 @@ namespace ChessGame
 		private IScoreManager scoreManager;
 
 		private ChessPieceType.Color turnColor;
+		private ChessPieceType.Color flipColor;
 
 		private Dictionary<ChessPieceType.Type, ICommand> commandDict;
 		private bool clickedOnce;
@@ -68,7 +69,6 @@ namespace ChessGame
 				if (!checkMateManager.IsInCheck(hypoBoard, kingLoc))
 				{
 					gameStack.Push(currentBoard);
-					Console.WriteLine("Stack Count "+gameStack.Count);
 					currentBoard = hypoBoard;
 					clickedOnce = false;
 					ChangeTurnColor();
@@ -91,7 +91,6 @@ namespace ChessGame
 		{
 			bool executeVal = false;
 			Vector2 clickLoc = DecideVect(click.Item2);
-			Console.WriteLine("clicked board X: " + clickLoc.X + " Y: " + clickLoc.Y);
 			if (!currentPiece.Equals(currentBoard[(int)clickLoc.X][(int)clickLoc.Y])
 				&& turnColor == currentBoard[(int)clickLoc.X][(int)clickLoc.Y].Color)
 			{
@@ -109,8 +108,9 @@ namespace ChessGame
 		}
 		private bool ClickedOnSideBar(Tuple<bool, Vector2> click)
 		{
-			//Console.WriteLine("clicked board X: " + click.Item2.X + " Y: " + click.Item2.Y);
-			scoreManager.Update(click.Item2);
+			ChessPieceType.ClickCommand press = scoreManager.Update(click.Item2);
+			if (press == ChessPieceType.ClickCommand.FlipBoard)
+				FlipBoard();
 			return false; 
 		}
 		public void AddCommand(ICommand com, ChessPieceType.Type key)
@@ -120,20 +120,29 @@ namespace ChessGame
 
 		public Vector2 DecideVect(Vector2 v)
 		{
-			//if (turnColor == ChessPieceType.Color.White)
+			if (flipColor == ChessPieceType.Color.White)
 				return v;
-			//else
-				//return new Vector2(7 - v.X, 7 - v.Y);
+			else
+				return new Vector2(7 - v.X, 7 - v.Y);
 		}
 
 		private void ChangeTurnColor()
 		{
 			checkMateManager.ChangeTurn();
-			//drawManager.ChangeTurn();
+			drawManager.ChangeTurn();
+			scoreManager.ChangeTurn();
 			if (turnColor == ChessPieceType.Color.White)
 				turnColor = ChessPieceType.Color.Black;
 			else
 				turnColor = ChessPieceType.Color.White;
+		}
+		private void FlipBoard()
+		{
+			drawManager.FlipBoard();
+			if (flipColor == ChessPieceType.Color.White)
+				flipColor = ChessPieceType.Color.Black;
+			else
+				flipColor = ChessPieceType.Color.White;
 		}
 	}
 }

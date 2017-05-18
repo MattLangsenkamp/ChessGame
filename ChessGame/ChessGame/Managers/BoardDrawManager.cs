@@ -14,6 +14,7 @@ namespace ChessGame.Managers
 		private int highlightX;
 		private int highlightY;
 		private ChessPieceType.Color turnColor;
+		private ChessPieceType.Color flipColor;
 		public BoardDrawManager()
 		{
 			turnColor = ChessPieceType.Color.White;
@@ -23,7 +24,7 @@ namespace ChessGame.Managers
 		public void Draw(SpriteBatch spriteBatch, IChessPiece[][] board)
 		{
 			DrawBoard(spriteBatch);
-			if (turnColor == ChessPieceType.Color.White)
+			if (flipColor == ChessPieceType.Color.White)
 				DrawPiecesWhite(spriteBatch, board);
 			else
 				DrawPiecesBlack(spriteBatch, board);
@@ -34,6 +35,13 @@ namespace ChessGame.Managers
 				turnColor = ChessPieceType.Color.Black;
 			else
 				turnColor = ChessPieceType.Color.White;
+		}
+		public void FlipBoard()
+		{
+			if (flipColor == ChessPieceType.Color.White)
+				flipColor = ChessPieceType.Color.Black;
+			else
+				flipColor = ChessPieceType.Color.White;
 		}
 		public void HighLightPiece(Vector2 vect)
 		{
