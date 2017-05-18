@@ -110,7 +110,7 @@ namespace ChessGame
 		private bool ClickedOnSideBar(Tuple<bool, Vector2> click)
 		{
 			//Console.WriteLine("clicked board X: " + click.Item2.X + " Y: " + click.Item2.Y);
-			scoreManager.ButtonPressed(click.Item2);
+			scoreManager.Update(click.Item2);
 			return false; 
 		}
 		public void AddCommand(ICommand com, ChessPieceType.Type key)

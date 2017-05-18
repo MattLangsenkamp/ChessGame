@@ -29,6 +29,8 @@ namespace ChessGame
 		private Texture2D tanBoardSheet;
 		private Texture2D lightMaroonBoardSheet;
 		private Texture2D lightTanBoardSheet;
+		private Texture2D arrowTextureLeft;
+		private Texture2D arrowTextureRight;
 
 		public void LoadContent(ContentManager content)
 		{
@@ -37,6 +39,8 @@ namespace ChessGame
 			tanBoardSheet = content.Load<Texture2D>("TanBoardPiece");
 			lightMaroonBoardSheet = content.Load<Texture2D>("MaroonLightBoardPiece");
 			lightTanBoardSheet = content.Load<Texture2D>("TanLightBoardPiece");
+			arrowTextureLeft = content.Load<Texture2D>("LeftArrow");
+			arrowTextureRight = content.Load<Texture2D>("RightArrow");
 		}
 
 		private SpriteFactory()
@@ -111,6 +115,14 @@ namespace ChessGame
 		public ISprite MakeScoreManagerBackRoundSprite()
 		{
 			return new SideBarBackRoundSprite(lightTanBoardSheet);
+		}
+		public ISprite MakeLeftArrowSprite()
+		{
+			return new ArrowSpriteLeft(arrowTextureLeft);
+		}
+		public ISprite MakeRightArrowSprite()
+		{
+			return new ArrowSpriteRight(arrowTextureRight);
 		}
 	}
 }

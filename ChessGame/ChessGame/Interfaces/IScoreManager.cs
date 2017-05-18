@@ -12,7 +12,7 @@ namespace ChessGame.Interfaces
 	{
 		void PieceTaken(ChessPieceType.Color teamColor, ChessPieceType.Type pieceType);
 		void Draw(SpriteBatch spriteBatch, IChessPiece[][] board);
-		void Update(Vector2 location);
-		void ButtonPressed(Vector2 loc);
+		ChessPieceType.ClickCommand Update(Vector2 location);
+		void ChangeTurn();
 	}
 }

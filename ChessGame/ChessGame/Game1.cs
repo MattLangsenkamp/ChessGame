@@ -33,6 +33,7 @@ namespace ChessGame
 			// TODO: Add your initialization logic here
 			this.IsMouseVisible = true;
 			SpriteFactory.Instance.LoadContent(Content);
+			TextSpriteFactory.Instance.LoadContent(Content);
 			boardManager = new BoardManager();
             base.Initialize();
 		}

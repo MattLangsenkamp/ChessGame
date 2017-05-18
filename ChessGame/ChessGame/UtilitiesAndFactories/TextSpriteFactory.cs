@@ -29,7 +29,7 @@ namespace ChessGame.UtilitiesAndFactories
 
 		}
 
-		public void LoadAllTextures(ContentManager content)
+		public void LoadContent(ContentManager content)
 		{
 			normalFont = content.Load<SpriteFont>("EmuLogic");
 		}

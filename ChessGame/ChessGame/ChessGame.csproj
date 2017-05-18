@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Buttons\ArrowButton.cs" />
     <Compile Include="Commands\BishopMoveCommand.cs" />
     <Compile Include="Commands\CastleCommand.cs" />
     <Compile Include="Commands\KingMoveCommand.cs" />
@@ -53,6 +54,8 @@
     <Compile Include="Managers\BoardCreatorManager.cs" />
     <Compile Include="Managers\BoardManager.cs" />
     <Compile Include="Managers\ScoreManager.cs" />
+    <Compile Include="Sprites\ArrowSpriteRight.cs" />
+    <Compile Include="Sprites\ArrowSpriteLeft.cs" />
     <Compile Include="Sprites\SideBarBackRoundSprite.cs" />
     <Compile Include="Sprites\TextSprite.cs" />
     <Compile Include="UtilitiesAndFactories\ChessPieceType.cs" />
@@ -96,6 +99,7 @@
     <Compile Include="Sprites\QueenSpriteWhite.cs" />
     <Compile Include="Sprites\RookSpriteBlack.cs" />
     <Compile Include="Sprites\RookSpriteWhite.cs" />
+    <Compile Include="UtilitiesAndFactories\TextSpriteFactory.cs" />
     <Compile Include="UtilitiesAndFactories\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>

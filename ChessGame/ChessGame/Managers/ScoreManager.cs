@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ChessGame.UtilitiesAndFactories;
 using Microsoft.Xna.Framework;
 using ChessGame.Sprites;
+using ChessGame.Buttons;
 
 namespace ChessGame.Managers
 {
@@ -16,14 +17,30 @@ namespace ChessGame.Managers
 		private int blackScore;
 		private int whiteScore;
 		private int[][] buttonList;
+
+		private ChessPieceType.Color turnColor;
+
 		private ISprite backRoundSprite;
+		private ITextSprite turnText;
 		private ITextSprite blackScoreText;
-		private ITextSprite whiteSocreText;
+		private ITextSprite whiteScoreText;
 		private ITextSprite boardFlipText;
+		private ArrowButton leftArrow;
+		private ArrowButton rightArrow;
+
 
 		public ScoreManager()
 		{
+			turnColor = ChessPieceType.Color.White;
 			backRoundSprite = SpriteFactory.Instance.MakeScoreManagerBackRoundSprite();
+			turnText = TextSpriteFactory.Instance.CreateNormalFontTextSpriteSprite();
+			turnText.Text = "White's turn";
+			blackScoreText = TextSpriteFactory.Instance.CreateNormalFontTextSpriteSprite();
+			blackScoreText.Text = "Black's Score: 0";
+			whiteScoreText = TextSpriteFactory.Instance.CreateNormalFontTextSpriteSprite();
+			whiteScoreText.Text = "Whites's Score: 0";
+			leftArrow = new ArrowButton(ChessPieceType.Direction.Left, new Vector2(8 * Utilities.PieceWidth, 4 * Utilities.PieceHeight));
+			rightArrow = new ArrowButton(ChessPieceType.Direction.Right, new Vector2(8 * Utilities.PieceWidth + Utilities.PieceWidth, 4 * Utilities.PieceHeight));
 
 			buttonList = new int[2][];
 			for (int i = 0; i < 2; i++)
@@ -40,9 +57,12 @@ namespace ChessGame.Managers
 		public void Draw(SpriteBatch spriteBatch, IChessPiece[][] board)
 		{
 			Vector2 loc = new Vector2(board.Length * Utilities.PieceWidth, 0);
-			//blackScoreText = new TextSprite();
-			//whiteSocreText = new TextSprite();
 			backRoundSprite.Draw(spriteBatch, loc);
+			turnText.Draw(spriteBatch, new Vector2(8 * Utilities.PieceWidth, 0));
+			blackScoreText.Draw(spriteBatch, new Vector2(8 * Utilities.PieceWidth, 2 * Utilities.PieceHeight));
+			whiteScoreText.Draw(spriteBatch, new Vector2(8 * Utilities.PieceWidth, 1 * Utilities.PieceHeight));
+			leftArrow.Draw(spriteBatch);
+			rightArrow.Draw(spriteBatch);		
 		}
 
 		public void PieceTaken(ChessPieceType.Color teamColorTaken, ChessPieceType.Type pieceTypeTaken)
@@ -75,9 +95,15 @@ namespace ChessGame.Managers
 			}
 		}
 
-		public void Update(Vector2 location)
+		public ChessPieceType.ClickCommand Update(Vector2 location)
 		{
-			
+			if (turnColor == ChessPieceType.Color.White)
+				turnText.Text = "White's turn";
+			else
+				turnText.Text = "Black's turn";
+			blackScoreText.Text = "Black's Score: "+blackScore;
+			whiteScoreText.Text = "Whites's Score: "+whiteScore;
+			return ButtonPressed(location);
 		}
 
 		private void DecideScore(ChessPieceType.Color teamColorTaken, int amount)
@@ -88,10 +114,10 @@ namespace ChessGame.Managers
 				blackScore += amount;
 		}
 
-		public void ButtonPressed(Vector2 loc)
+		private ChessPieceType.ClickCommand ButtonPressed(Vector2 loc)
 		{
 			int button = buttonList[(int)loc.X - 8][(int)loc.Y];
-
+			ChessPieceType.ClickCommand retVal = ChessPieceType.ClickCommand.NoClick;
 			switch (button)
 			{
 				case 0:
@@ -148,6 +174,16 @@ namespace ChessGame.Managers
 				default:
 					break;
 			}
+			return retVal;
+		}
+
+
+		public void ChangeTurn()
+		{
+			if (turnColor == ChessPieceType.Color.White)
+				turnColor = ChessPieceType.Color.Black;
+			else
+				turnColor = ChessPieceType.Color.White;
 		}
 	}
 }
