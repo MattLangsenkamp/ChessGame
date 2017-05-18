@@ -39,6 +39,8 @@ namespace ChessGame.Managers
 			blackScoreText.Text = "Black's Score: 0";
 			whiteScoreText = TextSpriteFactory.Instance.CreateNormalFontTextSpriteSprite();
 			whiteScoreText.Text = "Whites's Score: 0";
+			boardFlipText = TextSpriteFactory.Instance.CreateNormalFontTextSpriteSprite();
+			boardFlipText.Text = "Flip Board";
 			leftArrow = new ArrowButton(ChessPieceType.Direction.Left, new Vector2(8 * Utilities.PieceWidth, 4 * Utilities.PieceHeight));
 			rightArrow = new ArrowButton(ChessPieceType.Direction.Right, new Vector2(8 * Utilities.PieceWidth + Utilities.PieceWidth, 4 * Utilities.PieceHeight));
 
@@ -59,8 +61,9 @@ namespace ChessGame.Managers
 			Vector2 loc = new Vector2(board.Length * Utilities.PieceWidth, 0);
 			backRoundSprite.Draw(spriteBatch, loc);
 			turnText.Draw(spriteBatch, new Vector2(8 * Utilities.PieceWidth, 0));
-			blackScoreText.Draw(spriteBatch, new Vector2(8 * Utilities.PieceWidth, 2 * Utilities.PieceHeight));
 			whiteScoreText.Draw(spriteBatch, new Vector2(8 * Utilities.PieceWidth, 1 * Utilities.PieceHeight));
+			blackScoreText.Draw(spriteBatch, new Vector2(8 * Utilities.PieceWidth, 2 * Utilities.PieceHeight));
+			boardFlipText.Draw(spriteBatch, new Vector2(8 * Utilities.PieceWidth, 3 * Utilities.PieceHeight));
 			leftArrow.Draw(spriteBatch);
 			rightArrow.Draw(spriteBatch);		
 		}
@@ -121,59 +124,47 @@ namespace ChessGame.Managers
 			switch (button)
 			{
 				case 0:
-					Console.WriteLine(0);
 					break;
 				case 1:
-					Console.WriteLine(1);
 					break;
 				case 2:
-					Console.WriteLine(2);
 					break;
 				case 3:
-					Console.WriteLine(3);
 					break;
 				case 4:
-					Console.WriteLine(4);
 					break;
 				case 5:
-					Console.WriteLine(5);
 					break;
 				case 6:
-					Console.WriteLine(6);
+					retVal = ChessPieceType.ClickCommand.FlipBoard;
 					break;
 				case 7:
-					Console.WriteLine(7);
+					retVal = ChessPieceType.ClickCommand.FlipBoard;				
 					break;
 				case 8:
-					Console.WriteLine(8);
+					retVal = ChessPieceType.ClickCommand.PreviousBoard;				
 					break;
 				case 9:
-					Console.WriteLine(9);
+					retVal = ChessPieceType.ClickCommand.NextBoard;
 					break;
 				case 10:
-					Console.WriteLine(10);
 					break;
 				case 11:
-					Console.WriteLine(11);
 					break;
 				case 12:
-					Console.WriteLine(12);
 					break;
 				case 13:
-					Console.WriteLine(13);
 					break;
 				case 14:
-					Console.WriteLine(14);
 					break;
 				case 15:
-					Console.WriteLine(15);
 					break;
 				case 16:
-					Console.WriteLine(16);
 					break;
 				default:
 					break;
 			}
+			Console.WriteLine(retVal);
 			return retVal;
 		}
 
