@@ -11,7 +11,6 @@ namespace ChessGame.Commands
 {
 	public abstract class CommandAbstractClass : ICommand
 	{
-		//protected IChessPiece[][] board;
 
 		public bool IsEnemyInPosition(IChessPiece[][] board, Vector2 l, ChessPieceType.Color teamColor)
 		{

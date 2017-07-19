@@ -100,7 +100,10 @@ namespace ChessGame.Managers
 					break;
 			}
 		}
-
+		/**
+		 * update method for the scoremanager
+		 * determines what button was pressed and returns that information to the 
+		 */ 
 		public ChessPieceType.ClickCommand Update(Vector2 location)
 		{
 			if (turnColor == ChessPieceType.Color.White)
