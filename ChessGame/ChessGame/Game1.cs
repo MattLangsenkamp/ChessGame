@@ -30,23 +30,22 @@ namespace ChessGame
         
         protected override void Initialize()
         {
-			// TODO: Add your initialization logic here
+			Console.WriteLine(2);
 			this.IsMouseVisible = true;
 			SpriteFactory.Instance.LoadContent(Content);
 			TextSpriteFactory.Instance.LoadContent(Content);
+			
 			boardManager = new BoardManager();
+			BuildDict();
+			boardManager.CreateCheckMateManager();
             base.Initialize();
 		}
 
         protected override void LoadContent()
         {
+			Console.WriteLine(1);
 			spriteBatch = new SpriteBatch(GraphicsDevice);
-			boardManager.AddCommand(new BishopMoveCommand(), ChessPieceType.Type.Bishop);
-			boardManager.AddCommand(new KingMoveCommand(), ChessPieceType.Type.King);
-			boardManager.AddCommand(new KnightMoveCommand(), ChessPieceType.Type.Knight);
-			boardManager.AddCommand(new PawnMoveCommand(), ChessPieceType.Type.Pawn);
-			boardManager.AddCommand(new QueenMoveCommand(), ChessPieceType.Type.Queen);
-			boardManager.AddCommand(new RookMoveCommand(), ChessPieceType.Type.Rook);
+		
 		}
 
         protected override void UnloadContent()
@@ -95,5 +94,15 @@ namespace ChessGame
             base.Draw(gameTime);
 			spriteBatch.End();
         }
+
+		private void BuildDict()
+		{
+			boardManager.AddCommand(new BishopMoveCommand(), ChessPieceType.Type.Bishop);
+			boardManager.AddCommand(new KingMoveCommand(), ChessPieceType.Type.King);
+			boardManager.AddCommand(new KnightMoveCommand(), ChessPieceType.Type.Knight);
+			boardManager.AddCommand(new PawnMoveCommand(), ChessPieceType.Type.Pawn);
+			boardManager.AddCommand(new QueenMoveCommand(), ChessPieceType.Type.Queen);
+			boardManager.AddCommand(new RookMoveCommand(), ChessPieceType.Type.Rook);
+		}
     }
 }

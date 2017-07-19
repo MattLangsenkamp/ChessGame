@@ -35,7 +35,6 @@ namespace ChessGame
 			drawManager = new BoardDrawManager();
 			boardCreator = new BoardCreatorManager();
 			cursorManager = new CursorManager();
-			checkMateManager = new CheckMateManager(commandDict);
 			scoreManager = new ScoreManager();
 			gameStack = new Stack<IChessPiece[][]>();
 			currentBoard = boardCreator.BuildBoard();
@@ -43,6 +42,11 @@ namespace ChessGame
 			commandDict = new Dictionary<ChessPieceType.Type, ICommand>();
 			currentPiece = currentBoard[4][4];
 			turnColor = ChessPieceType.Color.White;
+		}
+
+		public void CreateCheckMateManager()
+		{
+			checkMateManager = new CheckMateManager(commandDict);
 		}
 
 		public void Draw(SpriteBatch spriteBatch)
@@ -60,16 +64,10 @@ namespace ChessGame
 			IChessPiece[][] hypoBoard = boardCreator.CopyBoard(currentBoard);
 			bool executeVal = false;
 			Vector2 kingLoc = checkMateManager.FindKing(hypoBoard, turnColor);
-			Console.WriteLine("here 1 ");
+
 			if (checkMateManager.IsInCheck(hypoBoard, kingLoc))
-			{
-				Console.WriteLine("here 2");
 				if (checkMateManager.IsInCheckMate(hypoBoard, kingLoc))
-				{
-					Console.WriteLine("here 3");
 					Console.WriteLine("checkMate " + turnColor);
-				}
-			}
 
 			if (click.Item1 == true)
 			{

@@ -66,12 +66,10 @@ namespace ChessGame.Managers
 			return false;
 		}
 		/**
-		 * method that checks if
+		 * method that checks if king in kingloc is in checkmate
 		 */ 
 		public bool IsInCheckMate(IChessPiece[][] board, Vector2 kingLoc)
 		{
-			//if (!IsInCheck(board, kingLoc))
-				//return false;
 
 			int x = (int)kingLoc.X;
 			int y = (int)kingLoc.Y;
@@ -80,10 +78,13 @@ namespace ChessGame.Managers
 				x-1, y, x+1, y,
 				x-1, y+1, x, y+1, x + 1, y+1};
 
-			for (int i = 0; i < 16; i = +2)
+			for (int i = 0; i < 16; i += 2)
 			{
-				if (!IsInCheck(board, new Vector2(places[i], places[i + 1])))
+				if (IsOnBoard(board, new Vector2(places[i], places[i + 1]))
+					&& !IsInCheck(board, new Vector2(places[i], places[i + 1]))
+					&& board[places[i]][places[i + 1]].Color == ChessPieceType.Color.Blank)
 				{
+					Console.WriteLine("here"+ places[i]+"  "+places[i + 1]);
 					return false;
 				}
 			}
@@ -166,13 +167,11 @@ namespace ChessGame.Managers
 			int y = (int)location.Y;
 			int yNew = y + 1;
 
-			if (IsOnBoard(board, new Vector2(x, yNew)))
-			{
-				Console.WriteLine(y);
+			if (IsOnBoard(board, new Vector2(x, yNew)))	
 				if(IsEnemyInPosition(board, new Vector2(x, yNew), turnColor))
 					if (board[x][yNew].Type == ChessPieceType.Type.King)
 						return true;
-			}
+
 			while (IsOnBoard(board, new Vector2(x, yNew)) && board[x][yNew].Color == ChessPieceType.Color.Blank)
 			{
 				yNew++;
@@ -328,7 +327,8 @@ namespace ChessGame.Managers
 				for (int x = 0; x < board.Length; x++)
 				{
 					IChessPiece curPiece = board[x][y];
-					if (CanObstructRedirect(board, kingLoc, new Vector2(x,y), curPiece))
+					if (!IsEnemyInPosition(board, new Vector2(x,y),turnColor) &&
+						CanObstructRedirect(board, kingLoc, new Vector2(x,y), curPiece))
 						return true;
 				}
 			return false;
@@ -376,7 +376,7 @@ namespace ChessGame.Managers
 			for (int y = 0; y < board.Length; y++)
 				for (int x = 0; x < board.Length; x++)
 				{
-					bool moveSuccessful = commandDict[ChessPieceType.Type.Rook].Execute(board, new Vector2(x, y), pieceLoc);
+					bool moveSuccessful = this.commandDict[ChessPieceType.Type.Rook].Execute(board, new Vector2(x, y), pieceLoc);
 					if (moveSuccessful && !IsInCheck(board, kingLoc))
 					{
 						SwapPieces(board,pieceLoc, new Vector2(x,y));
