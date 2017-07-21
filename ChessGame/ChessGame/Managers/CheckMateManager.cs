@@ -292,12 +292,14 @@ namespace ChessGame.Managers
 			int y = (int)location.Y;
 			int[] xNews = { x - 1, x + 1, x + 2, x + 2, x + 1, x - 1, x - 2, x - 2 };
 			int[] yNews = { y - 2, y - 2, y - 1, y + 1, y + 2, y + 2, y + 1, y - 1 };
-			int counter = 0;
-			for(int i = 0; i<board.Length;i++)
+
+			for(int i = 0; i<xNews.Length;i++)
 			{
-				if (IsOnBoard(board, new Vector2(xNews[counter], yNews[counter])) &&
-					board[xNews[counter]][yNews[counter]].Type == ChessPieceType.Type.Knight)
+				if (IsOnBoard(board, new Vector2(xNews[i], yNews[i])) &&
+					board[xNews[i]][yNews[i]].Type == ChessPieceType.Type.Knight)
+					if (IsEnemyInPosition(board, new Vector2(xNews[i], yNews[i]), turnColor))
 						return true;
+				
 			}
 			
 			return false;
